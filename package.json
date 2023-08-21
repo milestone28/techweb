@@ -1,0 +1,17 @@
+{
+  "name": "techweb",
+  "version": "1.0.0",
+  "description": "techNotes MERN Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemone server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
+}
