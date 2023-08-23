@@ -11,18 +11,23 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn')
 const PORT = process.env.PORT || 3500;
 
-connectDB();
-
 console.log(process.env.NODE_ENV);
 
+connectDB();
+
 app.use(logger); //should be 1st of the use
+
 app.use(cors(corsOptions)); //this use for the cors
 
 app.use(express.json());
+
 app.use(cookieParser());
 
 app.use("/", express.static(path.join(__dirname, "public")));
-app.use("/", require("./routes/root"));
+
+app.use("/", require("./routes/root")); //display to our local host or home page
+app.use("/users", require("./routes/userRoutes")); 
+app.use("/notes", require("./routes/noteRoutes")); 
 
 app.all("*", (req, res) => {
     res.status(404);
@@ -37,11 +42,11 @@ app.all("*", (req, res) => {
 
 
 
-app.use(errorHandler); //should be use last
+app.use(errorHandler); //should be use last to catch any kinds of error
 
 //add listener when connected
 mongoose.connection.once('open',() => {
-    console.log('Connected to DB.');
+    console.log('Connected to MongoDB.');
     app.listen(PORT, () => console.log(`Server running on port : ${PORT}`));
 })
 
